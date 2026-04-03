@@ -17,11 +17,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
           fetch-depth: 0
+      - name: fetch base branch
+        if: github.event_name == 'pull_request'
+        run: git fetch origin ${{ github.base_ref }}:${{ github.base_ref }}
       - name: get diff
         run: |
           if [ "${{ github.event_name }}" = "pull_request" ]; then
-            git diff origin/${{ github.base_ref }}...HEAD -- '*.ts' '*.js' '*.py' '*.go' '*.rs' ':!**/*.test.*' ':!**/tests/**' ':!.github/**' > diff.txt
+            git diff ${{ github.base_ref }}...HEAD -- '*.ts' '*.js' '*.py' '*.go' '*.rs' ':!**/*.test.*' ':!**/tests/**' ':!.github/**' > diff.txt
           else
             git diff HEAD~1 HEAD -- '*.ts' '*.js' '*.py' '*.go' '*.rs' ':!**/*.test.*' ':!**/tests/**' > diff.txt
           fi
