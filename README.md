@@ -31,6 +31,30 @@
 $ npm install
 ```
 
+## Environment Variables
+
+Create a `.env` file in the root directory and configure the following variables:
+
+```env
+DATABASE_URL="postgresql://username:password@localhost:5432/database_name"
+JWT_SECRET="your-secret-key"
+```
+
+## Database Setup
+
+This project uses Prisma as the ORM. To set up the database:
+
+```bash
+# Generate Prisma client
+$ npx prisma generate
+
+# Run database migrations
+$ npx prisma migrate dev
+
+# Optional: Seed the database
+$ npx prisma db seed
+```
+
 ## Compile and run the project
 
 ```bash
@@ -43,6 +67,27 @@ $ npm run start:dev
 # production mode
 $ npm run start:prod
 ```
+
+## API Endpoints
+
+The application includes the following authentication endpoints:
+
+### Authentication
+- `POST /auth/register` - Register a new user
+  ```json
+  {
+    "email": "user@example.com",
+    "password": "password123"
+  }
+  ```
+
+- `POST /auth/login` - Login with email and password
+  ```json
+  {
+    "email": "user@example.com",
+    "password": "password123"
+  }
+  ```
 
 ## Run tests
 
