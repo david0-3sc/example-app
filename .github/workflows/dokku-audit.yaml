@@ -19,7 +19,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: run dokku audit
-        uses: 3sidedcube/dokku@v1.0.0
+        uses: 3sidedcube/dokku@v1.0.1
         with:
           anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
