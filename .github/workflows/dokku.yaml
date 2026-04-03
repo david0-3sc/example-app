@@ -27,7 +27,7 @@ jobs:
             git diff HEAD~1 HEAD -- '*.ts' '*.js' '*.py' '*.go' '*.rs' ':!**/*.test.*' ':!**/tests/**' > diff.txt
           fi
       - name: run dokku
-        uses: davidodesola/dokku@v1
+        uses: 3sidedcube/dokku@v1.0.0
         with:
           anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
